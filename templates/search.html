@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='stylesheets/style.css')}}" >
+		<title>Stomble To-Do List</title>
+	</head>
+<body>
+	<h1>Stomble To-Do List</h1>
+	<hr>
+	{% if todo_list[0] %}
+	<h3>Results</h3>
+	<table>
+	    <tr>
+	    	<th>Completed</th>
+	    	<th>Task</th>
+	    	<th>Description</th>
+			<th>Submitted By</th>
+			<th>Modify</th>
+			<th>Remove</th>
+			<th>Toggle Status</th>
+	    </tr>
+		{% for task in todo_list %}
+		<tr>
+			<td>{{ task["status"] }}</td>
+			<td>{{ task["name"] }}</td>
+			<td>{{ task["desc"] }}</td>
+			<td>{{ task["user"] }}</td>
+			<td><a href="./update?_id={{ task['_id'] }}"><button type="submit">EDIT</button></a></td>
+			<td><a href="./remove?_id={{ task['_id'] }}"><button type="submit">DELETE</button></a></td>
+			<td><a href="./toggle_status?_id={{ task['_id'] }}"><button type="submit">TOGGLE</button></a></td>
+		</tr>
+		{% endfor %}
+	{% else %}
+		<h4>No Results Found</h4>
+	{% endif %}
+	</table>
+	<a href="/">Return Home</a>
+</body>
+</html>
